@@ -14,29 +14,35 @@ Some text
         canvas = document.getElementById('gameCanvas');
         canvascontext = canvas.getContext('2d');
         
+        //temp local variable
+        var framesPerSecond = 30;
+        //Inline
+        setInterval(function callBoth() {
+            moveEverything();
+            drawEverything();
+        }, 1000/framesPerSecond);
         
-        //Timer, m/s
-        setInterval(drawEverything, 1000)
-        
+    }
+    
+    function moveEverything() {
+        //Ball speed
+        ballX = ballX + 5;
+    
     }
     
     function drawEverything() {
         
-        ballX = ballX + 20;
-        
-        console.log(ballX);
-        
-        //
+        //background
         canvascontext.fillStyle = 'black';
         canvascontext.fillRect(0,0,canvas.width,canvas.height);
         
-        //
+        //paddle
         canvascontext.fillStyle = 'white';
-        canvascontext.fillRect(225,210,200,200);
+        canvascontext.fillRect(0,210,10,100);
         
-        //
+        //ball
         canvascontext.fillStyle = 'red';
-        canvascontext.fillRect(75,200,ballX,25);
+        canvascontext.fillRect(ballX,100,10,10);
     }
     </script>
 
