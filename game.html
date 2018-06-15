@@ -1,5 +1,5 @@
 <html>
-Some text
+Ping Pong Game
     
     <canvas id="gameCanvas" width="800" height="600"></canvas>
 
@@ -10,6 +10,8 @@ Some text
     var canvascontext;
     var ballX = 50;
     var ballSpeedX = 5;
+    var ballY = 10;
+    var ballSpeedY = 4;
     
     window.onload = function () {
         canvas = document.getElementById('gameCanvas');
@@ -28,13 +30,26 @@ Some text
     function moveEverything() {
         //Ball speed
         ballX = ballX + ballSpeedX;
+        ballY = ballY + ballSpeedY;
+        
         if(ballX < 0) {
             ballSpeedX = -ballSpeedX;
         }
         
         if(ballX > canvas.width) {
             ballSpeedX = -ballSpeedX;
+            
         }
+         
+        
+        if(ballY < 0) {
+            ballSpeedY = -ballSpeedY;
+        }
+        
+        if(ballY > canvas.height) {
+            ballSpeedY = -ballSpeedY;
+        }
+        
     }
     
     function drawEverything() {
@@ -42,11 +57,19 @@ Some text
         colourRect(0,0,canvas.width,canvas.height, 'black');
         //left paddle
         colourRect(0,210,10,100,'white');
+        
         //draws ball
-        colourRect(ballX,100,10,10,'red');
+        colourCircle(ballX, ballY, 10, 'white');
     }
     
-    function colourRect(leftX,topY, width,height, drawColour) {
+    function colourCircle(centerX, centerY, radius, drawColour) {
+        canvascontext.fillStyle = drawColour;
+        canvascontext.beginPath();
+        canvascontext.arc(centerX, centerY, radius, 0,Math.PI*2, true);
+        canvascontext.fill();
+    }
+    
+    function colourRect(leftX, topY, width, height, drawColour) {
         //background
         canvascontext.fillStyle = drawColour;
         canvascontext.fillRect(leftX,topY, width,height);
