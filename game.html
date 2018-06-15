@@ -52,10 +52,22 @@
         ballY = canvas.width/2;
     }
     
+    //if paddle is below ball, up 6 on y axies and vv.
+    function computerMovement(){
+        if (paddle2Y < ballY)  {
+            paddle2Y += 6;
+        } else {
+            paddle2Y -= 6;
+        }
+        
+    }
+    
     function moveEverything() {
+            computerMovement();
+        
         //Ball speed
-        ballX = ballX + ballSpeedX;
-        ballY = ballY + ballSpeedY;
+        ballX +=  ballSpeedX;
+        ballY +=  ballSpeedY;
         
         //left of zero
         //if below top of paddle && above bottom of paddle
