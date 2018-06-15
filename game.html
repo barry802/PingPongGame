@@ -11,6 +11,8 @@
     var ballY = 10;
     var ballSpeedY = 4;
     var paddle1Y, paddle2Y = 250;
+    var player1Score = 0;
+    var player2Score = 0;
     //const - never change
     const paddleThick = 10;
     const paddleHeight = 100;
@@ -78,6 +80,7 @@
                 ballSpeedX = -ballSpeedX;
             } else {
             ballReset();
+                player2Score ++;
             }
         }
         
@@ -89,6 +92,7 @@
                 ballSpeedX = -ballSpeedX;
             } else {
             ballReset();
+                player1Score ++;
             }
         }
          
@@ -114,7 +118,8 @@
         //draws ball
         colourCircle(ballX, ballY, 10, 'white');
         
-        canvascontext.fillText("score stuff", 100, 100);
+        canvascontext.fillText(player1Score, 100, 100);
+        canvascontext.fillText(player2Score, canvas.width -100, 100);
     }
     
     function colourCircle(centerX, centerY, radius, drawColour) {
