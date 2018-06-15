@@ -1,8 +1,6 @@
 <html>
-Ping Pong Game
     
     <canvas id="gameCanvas" width="800" height="600"></canvas>
-
 
 <script>
     
@@ -12,6 +10,22 @@ Ping Pong Game
     var ballSpeedX = 5;
     var ballY = 10;
     var ballSpeedY = 4;
+    var paddle1Y = 250;
+    
+    //const - never change
+    const paddleHeight = 100;
+    
+    //call everytime mouse moves
+    function calculateMousePos(evt) {
+        var rect = canvas.getBoundingClientRect();
+        var root = document.documentElement;
+        var mouseX = evt.clientX - rect.left - root.scrollLeft;
+        var mouseY = evt.clientY - rect.top - root.scrollTop;
+        return {
+            x:mouseX,
+            y:mouseY
+        };
+    }
     
     window.onload = function () {
         canvas = document.getElementById('gameCanvas');
@@ -25,6 +39,10 @@ Ping Pong Game
             drawEverything();
         }, 1000/framesPerSecond);
         
+        canvas.addEventListener('mousemove', function(evt) {
+            var mousePos = calculateMousePos(evt);
+            paddle1Y = mousePos.y-(paddleHeight/2);
+        });
     }
     
     function moveEverything() {
@@ -41,7 +59,6 @@ Ping Pong Game
             
         }
          
-        
         if(ballY < 0) {
             ballSpeedY = -ballSpeedY;
         }
@@ -56,7 +73,7 @@ Ping Pong Game
         //background
         colourRect(0,0,canvas.width,canvas.height, 'black');
         //left paddle
-        colourRect(0,210,10,100,'white');
+        colourRect(0,paddle1Y,10,paddleHeight,'white');
         
         //draws ball
         colourCircle(ballX, ballY, 10, 'white');
