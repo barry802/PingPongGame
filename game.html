@@ -54,12 +54,12 @@
     
     //if paddle is below ball, up 6 on y axies and vv.
     function computerMovement(){
-        if (paddle2Y < ballY)  {
+        var paddle2YCenter = paddle2Y + (paddleHeight/2);
+        if (paddle2Y < ballY-35)  {
             paddle2Y += 6;
-        } else {
+        } else if (paddle2Y > ballY+35)  {
             paddle2Y -= 6;
         }
-        
     }
     
     function moveEverything() {
@@ -113,6 +113,8 @@
         
         //draws ball
         colourCircle(ballX, ballY, 10, 'white');
+        
+        canvascontext.fillText("score stuff", 100, 100);
     }
     
     function colourCircle(centerX, centerY, radius, drawColour) {
