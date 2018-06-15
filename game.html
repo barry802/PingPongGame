@@ -7,12 +7,12 @@
     var canvas;
     var canvascontext;
     var ballX = 50;
-    var ballSpeedX = 5;
+    var ballSpeedX = 10;
     var ballY = 10;
     var ballSpeedY = 4;
-    var paddle1Y = 250;
-    
+    var paddle1Y, paddle2Y = 250;
     //const - never change
+    const paddleThick = 10;
     const paddleHeight = 100;
     
     //call everytime mouse moves
@@ -45,18 +45,39 @@
         });
     }
     
+    function ballReset() {
+        //reset position
+        ballSpeedX = -ballSpeedX;
+        ballX = canvas.width/2;
+        ballY = canvas.width/2;
+    }
+    
     function moveEverything() {
         //Ball speed
         ballX = ballX + ballSpeedX;
         ballY = ballY + ballSpeedY;
         
+        //left of zero
+        //if below top of paddle && above bottom of paddle
         if(ballX < 0) {
-            ballSpeedX = -ballSpeedX;
+            if(ballY > paddle1Y && 
+               ballY < paddle1Y+paddleHeight) {
+                //flip ball horziontal speed
+                ballSpeedX = -ballSpeedX;
+            } else {
+            ballReset();
+            }
         }
         
+        //right of zero
         if(ballX > canvas.width) {
-            ballSpeedX = -ballSpeedX;
-            
+            if(ballY > paddle2Y && 
+               ballY < paddle2Y+paddleHeight) {
+                //flip ball horziontal speed
+                ballSpeedX = -ballSpeedX;
+            } else {
+            ballReset();
+            }
         }
          
         if(ballY < 0) {
@@ -73,7 +94,10 @@
         //background
         colourRect(0,0,canvas.width,canvas.height, 'black');
         //left paddle
-        colourRect(0,paddle1Y,10,paddleHeight,'white');
+        colourRect(0,paddle1Y,paddleThick,paddleHeight,'white');
+        
+        //Right paddle
+        colourRect(canvas.width-paddleThick,paddle2Y,paddleThick,paddleHeight,'white');
         
         //draws ball
         colourCircle(ballX, ballY, 10, 'white');
