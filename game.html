@@ -81,7 +81,7 @@
                 
                 var deltaY = ballY
                     -(paddle1Y+paddleHeight/2);
-                ballSpeedY =deltaY * 0.35;
+                ballSpeedY = deltaY * 0.35;
                 
                 
             } else {
@@ -96,11 +96,10 @@
                ballY < paddle2Y+paddleHeight) {
                 //flip ball horziontal speed
                 ballSpeedX = -ballSpeedX;
-            } else {
-                
                 var deltaY = ballY
                     -(paddle2Y+paddleHeight/2);
-                ballSpeedY =deltaY * 0.35;
+                ballSpeedY = deltaY * 0.35;
+            } else {
                 
             ballReset();
                 player1Score ++;
