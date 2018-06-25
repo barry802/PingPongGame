@@ -31,6 +31,14 @@
         };
     }
     
+    function handleMouseClick(evt) {
+        if(showingWinScreen){
+            player1Score = 0;
+            player2Score = 0;
+            showingWinScreen = false;
+        }
+    }
+    
     window.onload = function () {
         canvas = document.getElementById('gameCanvas');
         canvascontext = canvas.getContext('2d');
@@ -43,6 +51,8 @@
             drawEverything();
         }, 1000/framesPerSecond);
         
+        canvas.addEventListener('mousedown', handleMouseClick);
+        
         canvas.addEventListener('mousemove', function(evt) {
             var mousePos = calculateMousePos(evt);
             paddle1Y = mousePos.y-(paddleHeight/2);
@@ -53,8 +63,6 @@
         if(player1Score >= winningScore ||
             player2Score >= winningScore)
             {
-                player1Score = 0;
-                player2Score = 0;
                 showingWinScreen = true;
             }
         
@@ -114,8 +122,8 @@
                 ballSpeedY = deltaY * 0.35;
             } else {
                 
+                player1Score ++; // must be before ball reset
             ballReset();
-                player1Score ++;
             }
         }
          
@@ -135,7 +143,16 @@
         
         if(showingWinScreen){
             canvascontext.fillStyle = "white";
-            canvascontext.fillText("Click To Continue", 100, 100);
+            
+            if(player1Score >= winningScore){
+                canvascontext.fillText("The Human Wins", 350, 200);
+
+            }else if(player2Score >= winningScore){
+                canvascontext.fillText("AI Wins", 350, 200);
+            
+            }
+            
+            canvascontext.fillText("Click To Continue", 350, 500);
             return;
         }
         
