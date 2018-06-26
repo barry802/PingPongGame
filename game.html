@@ -137,29 +137,35 @@
         
     }
     
+    function drawNet() {
+	for(var i=0;i<canvas.height;i+=40) {
+		colourRect(canvas.width/2-1,i,2,20,'white');
+	}
+}
+    
     function drawEverything() {
         //background
         colourRect(0,0,canvas.width,canvas.height, 'black');
         
-        if(showingWinScreen){
-            canvascontext.fillStyle = "white";
-            
-            if(player1Score >= winningScore){
-                canvascontext.fillText("The Human Wins", 350, 200);
+        if(showingWinScreen) {
+		canvascontext.fillStyle = 'white';
 
-            }else if(player2Score >= winningScore){
-                canvascontext.fillText("AI Wins", 350, 200);
-            
-            }
-            
-            canvascontext.fillText("Click To Continue", 350, 500);
-            return;
-        }
+		if(player1Score >= winningScore) {
+			canvascontext.fillText("Left Player Won", 350, 200);
+		} else if(player2Score >= winningScore) {
+			canvascontext.fillText("Right Player Won", 350, 200);
+		}
+
+		canvascontext.fillText("click to continue", 350, 500);
+		return;
+	}
         
-        //left paddle
+        drawNet();
+        
+        //left paddle - humann
         colourRect(0,paddle1Y,paddleThick,paddleHeight,'white');
         
-        //Right paddle
+        //Right paddle - AI
         colourRect(canvas.width-paddleThick,paddle2Y,paddleThick,paddleHeight,'white');
         
         //draws ball
